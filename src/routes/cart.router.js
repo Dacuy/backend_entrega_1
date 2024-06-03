@@ -62,7 +62,7 @@ router.post('/', (req,res) => {
 });
 
 
-//Ruta :cid para ver el contenido de un carrito con id Xssssss
+//Ruta :cid para ver el contenido de un carrito conasdsd id Xssssss
 router.get('/:cid', (req,res) => {
    const cartId = req.params.cid;
    const idDelCarrito = parseInt(cartId);
