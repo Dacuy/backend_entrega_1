@@ -1,1 +1,18 @@
-[{"title":"Nuevo título3","description":"Nueva descripción3","code":"Nuevo código3","price":99.99,"status":true,"stock":50,"category":"Nueva categoría","thumbnails":["nuevo_thumbnail1.jpg","nuevo_thumbnail2.jpg"],"id":1},{"title":"Nuevo título3","description":"Nueva descripción3","code":"Nuevo código3","price":99.99,"status":true,"stock":50,"category":"Nueva categoría","thumbnails":["nuevo_thumbnail1.jpg","nuevo_thumbnail2.jpg"],"id":2},{"title":"CuartoItem","description":"Comestible4","code":null,"price":4000000,"status":true,"stock":29,"category":"comida","thumbnails":"asdasds.png","id":3}]
+[
+  {
+    "id": 1,
+    "title": "Un item",
+    "description": "Un item!!",
+    "price": 10,
+    "stock": 100,
+    "category": "Objeto"
+  },
+  {
+    "id": 2,
+    "title": "Otro item!",
+    "description": "gran descripcion!",
+    "price": 100,
+    "stock": 200,
+    "category": "Comestibles"
+  }
+]

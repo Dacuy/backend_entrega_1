@@ -5,7 +5,6 @@ const router = Router();
 import fs from 'fs';
 
 
-//Ruta Post para crear un carrito
 router.post('/', (req,res) => {
     class cartManager {
         constructor() {
@@ -62,7 +61,6 @@ router.post('/', (req,res) => {
 });
 
 
-//Ruta :cid para ver el contenido de un carrito conasdsd id Xssssss
 router.get('/:cid', (req,res) => {
    const cartId = req.params.cid;
    const idDelCarrito = parseInt(cartId);
@@ -79,14 +77,12 @@ router.get('/:cid', (req,res) => {
 });
 router.post('/:cid/product/:pid', async (req, res) => {
     try {
-        // Leer los datos del archivo de carritos
         let fileData = await fs.promises.readFile('./src/produtos/carts.json', 'utf-8');
         let carritosActuales = JSON.parse(fileData);
         
         const idDelCarrito = parseInt(req.params.cid);
         const idDelProducto = parseInt(req.params.pid);
         
-        // Buscar el carrito y el producto correspondientes
         const carrito = carritosActuales.find(c => c.id === idDelCarrito);
         const producto = productos.find(p => p.id === idDelProducto);
         
@@ -98,20 +94,16 @@ router.post('/:cid/product/:pid', async (req, res) => {
             return res.status(404).send('Producto no encontrado');
         }
         
-        // Verificar si el producto ya existe en el carrito
         const existingProductIndex = carrito.products.findIndex(p => p.id === idDelProducto);
         if (existingProductIndex !== -1) {
-            // Si el producto ya está en el carrito, incrementar su cantidad en 1
             carrito.products[existingProductIndex].quantity++;
         } else {
-            // Si el producto no está en el carrito, agregarlo con una cantidad de 1
             carrito.products.push({
                 id: idDelProducto,
                 quantity: 1
             });
         }
         
-        // Escribir los datos actualizados en el archivo
         await fs.promises.writeFile('./src/produtos/carts.json', JSON.stringify(carritosActuales));
         
         res.status(200).send('Producto agregado al carrito correctamente');

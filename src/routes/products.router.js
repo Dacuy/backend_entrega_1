@@ -89,7 +89,6 @@ router.post('/updateProduct/:pid', (req, res) => {
         }
 
         async updateProduct(productId, updatedProductData) {
-            // Lista de campos que pueden ser actualizados
             const allowedFields = ['title', 'description', 'code', 'price', 'status', 'stock', 'category', 'thumbnails'];
 
             let fileData;
@@ -97,7 +96,7 @@ router.post('/updateProduct/:pid', (req, res) => {
                 fileData = await fs.promises.readFile(this.path, 'utf-8');
             } catch (error) {
                 console.error("Error al leer el archivo de productos:", error);
-                return false; // Indica que la operación de actualización falló
+                return false;
             }
         
             let productsActual;
@@ -110,21 +109,20 @@ router.post('/updateProduct/:pid', (req, res) => {
 
             const index = productsActual.findIndex(product => product.id === parseInt(productId));
             if (index !== -1) {
-                // Actualiza solo los campos permitidos
                 for (const field in updatedProductData) {
                     if (allowedFields.includes(field)) {
                         productsActual[index][field] = updatedProductData[field];
                     }
                 }
                 fs.writeFileSync(this.path, JSON.stringify(productsActual));
-                return true; // Indica que la operación de actualización fue exitosa
+                return true; 
             }
-            return false; // Indica que el producto no fue encontrado
+            return false; 
         }
     }
 
     async function context() {
-        const productIdToUpdate = req.params.pid; // Obtener el ID del producto a actualizar de los parámetros de la ruta
+        const productIdToUpdate = req.params.pid;
         if (!productIdToUpdate) {
             res.status(400).send('El ID del producto a actualizar no se proporcionó');
             return;
@@ -183,16 +181,16 @@ router.delete('/deleteProduct/:pid', (req, res) => {
 
             const index = productsActual.findIndex(product => product.id === parseInt(productId));
             if (index !== -1) {
-                productsActual.splice(index, 1); // Elimina el producto del array
+                productsActual.splice(index, 1);
                 fs.writeFileSync(this.path, JSON.stringify(productsActual));
-                return true; // Indica que el producto fue eliminado con éxito
+                return true;
             }
-            return false; // Indica que el producto no fue encontrado
+            return false;
         }
     }
 
     async function context() {
-        const productIdToDelete = req.params.pid; // Obtener el ID del producto a eliminar de los parámetros de la ruta
+        const productIdToDelete = req.params.pid; 
         if (!productIdToDelete) {
             res.status(400).send('El ID del producto a eliminar no se proporcionó');
             return;
@@ -235,11 +233,9 @@ router.get('/', (req, res) => {
         let productsData = fs.readFileSync('./src/produtos/products.json', 'utf-8');
         let products = JSON.parse(productsData);
 
-        // Obtener el parámetro de consulta "limit"
         const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
 
         if (limit) {
-            // Si se proporciona un límite, devolver solo los primeros "limit" productos
             products = products.slice(0, limit);
             res.json(products);
         } else {
