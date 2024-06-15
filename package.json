@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "node ./src/app.js"
+    "start": "node ./src/app.js",
+    "dev": "nodemon ./src/app.js"
   },
   "author": "dac_",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
     "handlebars": "^4.7.8",
+    "socket.io": "^4.7.5",
     "uuid": "^9.0.1"
   }
 }

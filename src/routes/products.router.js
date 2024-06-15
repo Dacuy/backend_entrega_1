@@ -250,5 +250,4 @@ router.get('/', (req, res) => {
         res.status(500).send('Error interno del servidor');
     }
 });
-
 export default router
